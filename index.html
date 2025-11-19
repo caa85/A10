@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Cookie Assignment</title>
+    <title>Cookies</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
 
-<h1>Cookie Demo</h1>
-<p id="display"></p>
+<h1>Cookies</h1>
+<p id="cookieDisplay"></p>
 
 <script>
+    function setCookie(name, value, days) {
+        let date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + date.toUTCString();
+        document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
     function getCookie(name) {
         let cname = name + "=";
         let decoded = decodeURIComponent(document.cookie);
@@ -23,24 +36,21 @@
         return "";
     }
 
-    let savedValue = getCookie("myCookie");
+    let value = getCookie("myCookie");
 
-    if (savedValue === "") {
-    
-        let userValue = prompt("Enter a value for your cookie:");
-        if (userValue !== null && userValue !== "") {
-            document.cookie = "myCookie=" + userValue + "; path=/";
-            document.getElementById("display").innerText =
-                "Refresh the page to see the cookie.";
-        }
+    if (value === "") {
+        setCookie("myCookie", "This is your saved cookie value!", 7);
+        document.getElementById("cookieDisplay").innerText =
+            "Cookie created! Reload the page to see it.";
     } else {
-    
-        document.getElementById("display").innerText =
-            "Saved cookie value: " + savedValue;
+        document.getElementById("cookieDisplay").innerText =
+            "Cookie value: " + value;
     }
 </script>
+
 <footer>
-    <p>&copy;Chloe Acompanado, 11-18-2025</p>
+    <p>&copy; Chloe Acompanado, 11/18/2025</p>
 </footer>
+
 </body>
 </html>
