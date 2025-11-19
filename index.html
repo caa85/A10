@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cookie Assignment</title>
+</head>
+<body>
+
+<h1>Cookie Demo</h1>
+<p id="display"></p>
+
+<script>
+    function getCookie(name) {
+        let cname = name + "=";
+        let decoded = decodeURIComponent(document.cookie);
+        let parts = decoded.split(";");
+
+        for (let p of parts) {
+            p = p.trim();
+            if (p.indexOf(cname) === 0) {
+                return p.substring(cname.length, p.length);
+            }
+        }
+        return "";
+    }
+
+    let savedValue = getCookie("myCookie");
+
+    if (savedValue === "") {
+    
+        let userValue = prompt("Enter a value for your cookie:");
+        if (userValue !== null && userValue !== "") {
+            document.cookie = "myCookie=" + userValue + "; path=/";
+            document.getElementById("display").innerText =
+                "Refresh the page to see the cookie.";
+        }
+    } else {
+    
+        document.getElementById("display").innerText =
+            "Saved cookie value: " + savedValue;
+    }
+</script>
+<footer>
+    <p>&copy;Chloe Acompanado, 11-18-2025</p>
+</footer>
+</body>
+</html>
